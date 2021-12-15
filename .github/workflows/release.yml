@@ -21,12 +21,12 @@ jobs:
       # build image
       - name: Build Rainbow Music Led OS
         run: |
-          git clone https://github.com/tihoangyeudau/Hyperbian.git
+          git clone https://github.com/tihoangyeudau/Hyperbian-1.git
           git clone https://github.com/tihoangyeudau/pi-gen.git
           touch ./pi-gen/stage3/SKIP ./pi-gen/stage4/SKIP ./pi-gen/stage4/SKIP_IMAGES
           touch ./pi-gen/stage5/SKIP ./pi-gen/stage5/SKIP_IMAGES
-          cp -R ./Hyperbian/stage-hyperbian ./pi-gen/stage-hyperbian
-          cp ./Hyperbian/config ./pi-gen/config && cd pi-gen
+          cp -R ./Hyperbian-1/stage-hyperbian ./pi-gen/stage-hyperbian
+          cp ./Hyperbian-1/config ./pi-gen/config && cd pi-gen
           sudo ./build.sh
           sudo mv ./deploy/*.zip ./deploy/Hyperbian.zip
           sudo chown -fR $(stat -c "%U:%G" .) ./deploy
