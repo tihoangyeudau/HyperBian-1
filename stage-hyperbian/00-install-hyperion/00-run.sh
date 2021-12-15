@@ -15,7 +15,7 @@ curl -L $HYPERION_RELEASE --output "$ROOTFS_DIR"/tmp/ambilightwifi.deb
 
 # Download Rpi fan
 echo 'Downloading Rpi fan ........................'
-curl -sS -L --get https://github.com/tihoangyeudau/rpi-fan/releases/download/1.0.0/rpi-fan.tar.gz | tar --strip-components=1 -C ${ROOTFS_DIR}/usr/share/rpi-fan share/rpi-fan -xz
+curl -sS -L --get https://github.com/tihoangyeudau/rpi-fan/releases/download/1.0.0/rpi-fan.tar.gz | tar --strip-components=1 -C ${ROOTFS_DIR}/usr/share/rpi-fan /usr/share/rpi-fan -xz
 
 # Copy service file
 cp rpi-fan.service ${ROOTFS_DIR}/etc/systemd/system/rpi-fan@.service
