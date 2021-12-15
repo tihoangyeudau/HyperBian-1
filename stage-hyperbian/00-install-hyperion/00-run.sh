@@ -15,7 +15,7 @@ curl -L $HYPERION_RELEASE --output "$ROOTFS_DIR"/tmp/ambilightwifi.deb
 
 # Download Rpi fan
 echo 'Downloading Rpi fan ........................'
-curl -sS -L --get https://github.com/tihoangyeudau/rpi-fan/releases/download/1.0.0/rpi-fan.tar.gz | tar --strip-components=1 -C ${ROOTFS_DIR}/usr/share/rpi-fan /usr/share/rpi-fan -xz
+curl -sS -L --get https://github.com/tihoangyeudau/rpi-fan/releases/download/1.0.0/rpi-fan.tar.gz | tar --strip-components=0 -C ${ROOTFS_DIR}/usr/share/ rpi-fan -xz
 
 # Copy service file
 cp rpi-fan.service ${ROOTFS_DIR}/etc/systemd/system/rpi-fan@.service
@@ -41,10 +41,10 @@ install -m 755 files/motd-rmlos "${ROOTFS_DIR}"/etc/update-motd.d/10-rmlos
 sed -i "s/^#PrintLastLog yes.*/PrintLastLog no/" ${ROOTFS_DIR}/etc/ssh/sshd_config
 
 on_chroot << EOF
-echo 'Installing Hyperion ........................'
-apt install /tmp/ambilightwifi.deb
+echo 'Installing Ambilight WiFi ........................'
+apt-get update && apt-get -y install /tmp/ambilightwifi.deb
 rm /tmp/ambilightwifi.deb
-mv /etc/systemd/system/ambilightwifid@.service /etc/systemd/system/ambilightwifi@.service
+cp /etc/systemd/system/ambilightwifi.systemd /etc/systemd/system/ambilightwifi@.service
 echo 'Registering Ambilight WiFi & Rpi fan'
 systemctl -q enable ambilightwifi"@rml".service
 systemctl -q enable rpi-fan"@rml".service
