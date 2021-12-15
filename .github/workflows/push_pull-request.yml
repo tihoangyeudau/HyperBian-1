@@ -1,9 +1,9 @@
-name: HyperBian CI Build
+name: Rainbow Music Led OS CI Build
 on: [push, pull_request]
 
 jobs:
   rpi-image:
-    name: "Build HyperBian image"
+    name: "Build Rainbow Music Led OS image"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -16,14 +16,18 @@ jobs:
           sudo apt-get install -y coreutils quilt parted qemu-utils qemu-user-static debootstrap zerofree zip dosfstools libarchive-tools libcap2-bin grep rsync xz-utils file git curl bc
 
       # build image
-      - name: Build HyperBian
+      - name: Build Rainbow Music Led OS
         run: |
-          git clone https://github.com/RPi-Distro/pi-gen.git
+          git clone https://github.com/tihoangyeudau/Hyperbian.git
+          git clone https://github.com/tihoangyeudau/pi-gen.git
           touch ./pi-gen/stage3/SKIP ./pi-gen/stage4/SKIP ./pi-gen/stage4/SKIP_IMAGES
           touch ./pi-gen/stage5/SKIP ./pi-gen/stage5/SKIP_IMAGES
-          cp -R stage-hyperbian pi-gen/stage-hyperbian
-          cp config pi-gen/config && cd pi-gen
+          cp -R ./Hyperbian/stage-hyperbian ./pi-gen/stage-hyperbian
+          cp ./Hyperbian/config ./pi-gen/config && cd pi-gen
+          export LC_ALL='C.UTF-8'
+          export LANGUAGE='C.UTF-8'
+          export MESSENGE='C.UTF-8'
           sudo ./build.sh
-          sudo mv ./deploy/*.zip ./deploy/HyperBian.zip
+          sudo mv ./deploy/*.zip ./deploy/Hyperbian.zip
           sudo chown -fR $(stat -c "%U:%G" .) ./deploy
 

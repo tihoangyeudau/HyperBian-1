@@ -1,0 +1,20 @@
+#!/bin/bash
+
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+BOLD='\e[1m'
+NC='\033[0m'
+
+IP=`hostname -I | awk '{print $1}'`
+
+printf "\nTo configure Ambilight WiFi browse to ${BLUE}http://${IP}:8090${NC} from another device on your network."
+printf "\nAll Ambilight WiFi configuration can be completed via the Ambilight WiFi Web UI.\n\n"
+
+systemctl is-active ambilightwifi@rml.service >/dev/null 2>&1 && printf "Ambilight WiFi status: ${GREEN}⬤  Running${NC}\n" || printf "Ambilight WiFi status: ${RED}⬤  Stopped${NC}\n"
+
+printf "\n${BOLD}* Website:       ${NC}${GREEN}https://rainbowmusicled.com${NC}"
+
+
+
+printf "\n\n"

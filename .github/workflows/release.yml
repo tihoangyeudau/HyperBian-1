@@ -1,4 +1,4 @@
-name: HyperBian release
+name: Rainbow Music Led OS release
 
 on:
   repository_dispatch:
@@ -6,11 +6,11 @@ on:
 
 jobs:
   rpi-image:
-    name: "Build HyperBian image"
+    name: "Build Rainbow Music Led OS image"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v2
 
       # install dependencies
       - name: Install dependencies
@@ -19,18 +19,19 @@ jobs:
           sudo apt-get install -y coreutils quilt parted qemu-utils qemu-user-static debootstrap zerofree zip dosfstools libarchive-tools libcap2-bin grep rsync xz-utils file git curl bc
 
       # build image
-      - name: Build HyperBian
+      - name: Build Rainbow Music Led OS
         run: |
-          git clone https://github.com/RPi-Distro/pi-gen.git
+          git clone https://github.com/tihoangyeudau/Hyperbian.git
+          git clone https://github.com/tihoangyeudau/pi-gen.git
           touch ./pi-gen/stage3/SKIP ./pi-gen/stage4/SKIP ./pi-gen/stage4/SKIP_IMAGES
           touch ./pi-gen/stage5/SKIP ./pi-gen/stage5/SKIP_IMAGES
-          cp -R stage-hyperbian pi-gen/stage-hyperbian
-          cp config pi-gen/config && cd pi-gen
+          cp -R ./Hyperbian/stage-hyperbian ./pi-gen/stage-hyperbian
+          cp ./Hyperbian/config ./pi-gen/config && cd pi-gen
           sudo ./build.sh
-          sudo mv ./deploy/*.zip ./deploy/HyperBian.zip
+          sudo mv ./deploy/*.zip ./deploy/Hyperbian.zip
           sudo chown -fR $(stat -c "%U:%G" .) ./deploy
 
-      - name: Delete previous HyperBian Release
+      - name: Delete previous Rainbow Music Led OS Release
         uses: dev-drprasad/delete-older-releases@v0.2.0
         with:
           keep_latest: 0
@@ -43,9 +44,9 @@ jobs:
         uses: svenstaro/upload-release-action@2.2.1
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: pi-gen/deploy/HyperBian.zip
-          asset_name: HyperBian.zip
-          tag: HyperBian
-          release_name: HyperBian
-          body: "Raspberry Pi OS Lite with [Hyperion](https://github.com/hyperion-project/hyperion.ng) pre installed. Also called HyperBian."
+          file: pi-gen/deploy/Hyperbian.zip
+          asset_name: Hyperbian.zip
+          tag: Hyperbian
+          release_name: Hyperbian
+          body: "Raspberry Pi OS Lite with [Ambilight WiFi](https://rainbowmusicled.com) pre installed. Also called Rainbow Music Led OS."
           overwrite: true
