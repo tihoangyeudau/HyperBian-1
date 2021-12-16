@@ -44,8 +44,8 @@ on_chroot << EOF
 echo 'Installing Ambilight WiFi ........................'
 apt-get update && apt-get -y install /tmp/ambilightwifi.deb
 rm /tmp/ambilightwifi.deb
-cp /etc/systemd/system/ambilightwifi.systemd /etc/systemd/system/ambilightwifi@.service
 echo 'Registering Ambilight WiFi & Rpi fan'
+cp /etc/systemd/system/ambilightwifi.systemd /etc/systemd/system/ambilightwifi@.service
 systemctl -q enable ambilightwifi"@rml".service
 systemctl -q enable rpi-fan"@rml".service
 EOF
