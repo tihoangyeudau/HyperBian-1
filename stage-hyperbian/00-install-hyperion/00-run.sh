@@ -40,7 +40,7 @@ sed -i "s/^#PrintLastLog yes.*/PrintLastLog no/" ${ROOTFS_DIR}/etc/ssh/sshd_conf
 
 on_chroot << EOF
 echo 'Installing Ambilight WiFi ........................'
-apt-get update && apt-get -y install /tmp/ambilightwifi.deb
+apt-get update && apt-get -y install libglvnd0 && apt-get -y install /tmp/ambilightwifi.deb
 rm /tmp/ambilightwifi.deb
 echo 'Registering Ambilight WiFi & Rpi fan'
 cp /usr/share/ambilightwifi/service/ambilightwifi.systemd /etc/systemd/system/ambilightwifi@.service
