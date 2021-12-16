@@ -33,8 +33,6 @@ sed -i "s/^SUPPORT_URL=.*$/SUPPORT_URL=\"https:\/\/rainbowmusicled.com\/\"/g" ${
 sed -i "s/^BUG_REPORT_URL=.*$/BUG_REPORT_URL=\"https:\/\/rainbowmusicled.com\/\"/g" ${ROOTFS_DIR}/usr/lib/os-release
 
 # Custom motd
-rm "${ROOTFS_DIR}"/etc/motd
-rm "${ROOTFS_DIR}"/etc/update-motd.d/10-uname
 install -m 755 files/motd-rmlos "${ROOTFS_DIR}"/etc/update-motd.d/10-rmlos
 
 # Remove the "last login" information
@@ -45,7 +43,7 @@ echo 'Installing Ambilight WiFi ........................'
 apt-get update && apt-get -y install /tmp/ambilightwifi.deb
 rm /tmp/ambilightwifi.deb
 echo 'Registering Ambilight WiFi & Rpi fan'
-cp /etc/systemd/system/ambilightwifi.systemd /etc/systemd/system/ambilightwifi@.service
+cp /usr/share/ambilightwifi/service/ambilightwifi.systemd /etc/systemd/system/ambilightwifi@.service
 systemctl -q enable ambilightwifi"@rml".service
 systemctl -q enable rpi-fan"@rml".service
 EOF
