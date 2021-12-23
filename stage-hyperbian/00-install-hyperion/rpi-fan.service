@@ -1,14 +1,10 @@
 [Unit]
-Description=Rpi fan systemd service
-After=network.target
+Description=Rpi Fan automatic
+After=multi-user.target
 
 [Service]
-ExecStart=/usr/share/rpi-fan
-WorkingDirectory=/usr/share/rpi-fan
-TimeoutStopSec=5
-KillMode=mixed
-Restart=on-failure
-RestartSec=2
-
+Type=idle
+ExecStart=/usr/bin/python /usr/share/rpi-fan/rpi-fan.py
+ 
 [Install]
 WantedBy=multi-user.target
