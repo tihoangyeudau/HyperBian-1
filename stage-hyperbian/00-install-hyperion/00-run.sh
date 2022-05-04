@@ -1,8 +1,8 @@
 #!/bin/bash -e
 
 # Select the appropriate download path
-HYPERION_DOWNLOAD_URL="https://github.com/tihoangyeudau/hyperion.ng-13/releases/download"
-HYPERION_RELEASES_URL="https://api.github.com/repos/tihoangyeudau/hyperion.ng-13/releases"
+HYPERION_DOWNLOAD_URL="https://github.com/tihoangyeudau/hyperion.ng-14/releases/download"
+HYPERION_RELEASES_URL="https://api.github.com/repos/tihoangyeudau/hyperion.ng-14/releases"
 
 # Get the latest version
 HYPERION_LATEST_VERSION=$(curl -sL "$HYPERION_RELEASES_URL" | grep "tag_name" | head -1 | cut -d '"' -f 4)
